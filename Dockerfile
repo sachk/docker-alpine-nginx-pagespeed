@@ -39,7 +39,7 @@ RUN set -x && \
     make install V=0 && \
     # Build PageSpeed:
     # Check https://github.com/pagespeed/ngx_pagespeed/releases for the latest version
-    PAGESPEED_VERSION=1.11.33.3 && \
+    PAGESPEED_VERSION=1.13.35.2-stable && \
     cd /tmp && \
     curl -L https://dl.google.com/dl/linux/mod-pagespeed/tar/beta/mod-pagespeed-beta-${PAGESPEED_VERSION}-r0.tar.bz2 | tar -jx && \
     curl -L https://github.com/pagespeed/ngx_pagespeed/archive/v${PAGESPEED_VERSION}-beta.tar.gz | tar -zx && \
@@ -66,7 +66,7 @@ RUN set -x && \
     cp -r /tmp/modpagespeed-${PAGESPEED_VERSION}/src/pagespeed/automatic/pagespeed_automatic.a /tmp/ngx_pagespeed-${PAGESPEED_VERSION}-beta/psol/lib/Release/linux/x64 && \
     # Build Nginx with support for PageSpeed:
     # Check http://nginx.org/en/download.html for the latest version.
-    NGINX_VERSION=1.11.13 && \
+    NGINX_VERSION=1.14.0 && \
     cd /tmp && \
     curl -L http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz | tar -zx && \
     cd /tmp/nginx-${NGINX_VERSION} && \
