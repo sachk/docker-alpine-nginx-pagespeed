@@ -43,7 +43,8 @@ RUN apk --no-cache add \
         icu-libs \
         openssl \
         pcre \
-        zlib
+        zlib \
+        git
 
 RUN apk --no-cache add -t .build-deps \
         apache2-dev \
