@@ -2,7 +2,7 @@ FROM alpine:3.4
 
 # Inspired by wunderkraut/alpine-nginx-pagespeed (aka ilari/alpine-nginx-pagespeed:latest) with some extra modules.
 
-ENV NGINX_VERSION=1.14.0
+ENV NGINX_VERSION=1.15.2
 
 ENV PAGESPEED_VERSION=1.13.35.2-stable
 
@@ -83,7 +83,10 @@ WORKDIR /tmp
 #       --without-http_upstream_ip_hash_module \
 #       --pid-path=/var/run/nginx.pid "
 
-RUN     wget https://github.com/apache/incubator-pagespeed-ngx/archive/v${PAGESPEED_VERSION}.zip && \
+# Brotoli
+
+RUN     git clone --recursive https://github.com/google/ngx_brotli.git && \
+        wget https://github.com/apache/incubator-pagespeed-ngx/archive/v${PAGESPEED_VERSION}.zip && \
         unzip v${PAGESPEED_VERSION}.zip && \
         nps_dir=$(find . -name "*pagespeed-ngx-${PAGESPEED_VERSION}" -type d) && \
         cd "$nps_dir" && \
@@ -95,7 +98,7 @@ RUN     wget https://github.com/apache/incubator-pagespeed-ngx/archive/v${PAGESP
         wget http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz && \
         tar -xvzf nginx-${NGINX_VERSION}.tar.gz && \
         cd nginx-${NGINX_VERSION}/ && \
-        ./configure --add-module=$HOME/$nps_dir ${PS_NGX_EXTRA_FLAGS} && \
+        ./configure --add-module=$HOME/$nps_dir --add-module $HOME/ngx_brotli ${PS_NGX_EXTRA_FLAGS} && \
         make && \
         make install
 
