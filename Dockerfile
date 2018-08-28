@@ -41,7 +41,7 @@ RUN	git clone --recursive https://github.com/google/ngx_brotli.git && \
 	./configure --with-compat --add-dynamic-module=/tmp/ngx_brotli && \
 	make modules
 
-FROM pagespeed/nginx-pagespeed
+FROM pagespeed/nginx-pagespeed:ngx1.15
 
 COPY --from=buider /tmp/nginx/objs/ngx_http_brotli_static_module.so /etc/nginx/modules
 COPY --from=buider /tmp/nginx/objs/ngx_http_brotli_filter_module.so /etc/nginx/modules
