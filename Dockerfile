@@ -12,9 +12,7 @@ RUN apk --no-cache --update add \
         icu-libs \
         openssl \
         pcre \
-        zlib
-
-RUN	apk --no-cache --update add -t .build-deps \
+        zlib \
         apache2-dev \
         apr-dev \
         apr-util-dev \
@@ -27,7 +25,7 @@ RUN	apk --no-cache --update add -t .build-deps \
         openssl-dev \
         pcre-dev \
         python \
-		git \
+		    git \
         zlib-dev
 
 WORKDIR /tmp
